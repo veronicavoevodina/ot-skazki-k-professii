@@ -25,7 +25,7 @@ export function Header() {
           href="/"
           className="flex items-center gap-2 font-bold text-[var(--navy)]"
         >
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--red)] text-[var(--milk)] shadow-[0_3px_0_var(--red-deep)]">
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--red)] text-[var(--milk)]">
             <Sparkles className="h-4 w-4" />
           </span>
           <span className="hidden text-sm leading-tight sm:block">
@@ -45,7 +45,7 @@ export function Header() {
                 href={link.href}
                 className={`rounded-xl px-3 py-2 text-sm font-semibold transition ${
                   active
-                    ? "bg-[var(--red)] text-white shadow-[0_2px_0_var(--red-deep)]"
+                    ? "bg-[var(--red)] text-white"
                     : "text-[var(--navy)]/80 hover:bg-[var(--linen)]"
                 }`}
               >

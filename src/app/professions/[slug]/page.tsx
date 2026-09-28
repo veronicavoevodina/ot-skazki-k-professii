@@ -1,41 +1,46 @@
-import Link from 'next/link'
-import { notFound } from 'next/navigation'
-import { ExternalLink } from 'lucide-react'
-import { getHeroineById } from '@/data/heroines'
-import { getProfessionBySlug, professions } from '@/data/professions'
-import { qualities } from '@/data/qualities'
-import type { QualityId } from '@/lib/types'
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { ExternalLink } from "lucide-react";
+import { getHeroineById } from "@/data/heroines";
+import { getProfessionBySlug, professions } from "@/data/professions";
+import { qualities } from "@/data/qualities";
+import type { QualityId } from "@/lib/types";
 
 interface PageProps {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }
 
-export function generateStaticParams () {
-  return professions.map((p) => ({ slug: p.slug }))
+export function generateStaticParams() {
+  return professions.map((p) => ({ slug: p.slug }));
 }
 
-export default async function ProfessionPage ({ params }: PageProps) {
-  const { slug } = await params
-  const profession = getProfessionBySlug(slug)
+export default async function ProfessionPage({ params }: PageProps) {
+  const { slug } = await params;
+  const profession = getProfessionBySlug(slug);
 
-  if (!profession) notFound()
+  if (!profession) notFound();
 
-  const qualityIds = (Object.entries(profession.qualities) as [QualityId, number][])
+  const qualityIds = (
+    Object.entries(profession.qualities) as [QualityId, number][]
+  )
     .sort((a, b) => b[1] - a[1])
-    .map(([id]) => id)
+    .map(([id]) => id);
 
   const linkedHeroines = profession.heroineIds
     .map((id) => getHeroineById(id))
-    .filter(Boolean)
+    .filter(Boolean);
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
-      <Link href="/professions" className="text-sm font-medium text-[var(--navy)]/60 hover:text-[var(--navy)]">
+      <Link
+        href="/professions"
+        className="text-sm font-medium text-[var(--navy)]/60 hover:text-[var(--navy)]"
+      >
         ← Все профессии
       </Link>
 
       <div className="mt-4 mb-2 flex items-center gap-3">
-        <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-3xl shadow-sm">
+        <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-3xl">
           {profession.icon}
         </span>
         <h1 className="text-3xl font-semibold text-[var(--navy)] sm:text-4xl">
@@ -48,9 +53,15 @@ export default async function ProfessionPage ({ params }: PageProps) {
       </p>
 
       <section className="mt-10">
-        <h2 className="mb-3 text-2xl font-semibold text-[var(--navy)]">Чем занимается?</h2>
-        <p className="leading-relaxed text-[var(--navy)]/80">{profession.whatDoes}</p>
-        <p className="mt-3 leading-relaxed text-[var(--navy)]/70">{profession.description}</p>
+        <h2 className="mb-3 text-2xl font-semibold text-[var(--navy)]">
+          Чем занимается?
+        </h2>
+        <p className="leading-relaxed text-[var(--navy)]/80">
+          {profession.whatDoes}
+        </p>
+        <p className="mt-3 leading-relaxed text-[var(--navy)]/70">
+          {profession.description}
+        </p>
       </section>
 
       <section className="mt-10">
@@ -67,7 +78,9 @@ export default async function ProfessionPage ({ params }: PageProps) {
                 <span aria-hidden>{qualities[id].emoji}</span>
                 {qualities[id].name}
               </div>
-              <p className="text-sm text-[var(--navy)]/65">{qualities[id].description}</p>
+              <p className="text-sm text-[var(--navy)]/65">
+                {qualities[id].description}
+              </p>
             </div>
           ))}
         </div>
@@ -81,7 +94,7 @@ export default async function ProfessionPage ({ params }: PageProps) {
           {profession.schoolSubjects.map((subject) => (
             <span
               key={subject}
-              className="rounded-full bg-white px-3 py-1.5 text-sm text-[var(--navy)] shadow-sm"
+              className="rounded-full bg-white px-3 py-1.5 text-sm text-[var(--navy)]"
             >
               {subject}
             </span>
@@ -94,19 +107,26 @@ export default async function ProfessionPage ({ params }: PageProps) {
           Какая сказочная героиня напоминает об этих качествах?
         </h2>
         <div className="grid gap-3">
-          {linkedHeroines.map((heroine) => (
-            heroine && (
-              <Link
-                key={heroine.id}
-                href={`/heroines/${heroine.slug}`}
-                className="rounded-2xl border border-[var(--navy)]/10 bg-white p-4 transition hover:border-[var(--gold)]"
-              >
-                <p className="text-xs font-medium text-[var(--gold-dark)]">{heroine.story}</p>
-                <p className="text-lg font-semibold text-[var(--navy)]">{heroine.name}</p>
-                <p className="mt-1 text-sm text-[var(--navy)]/65">{heroine.shortDescription}</p>
-              </Link>
-            )
-          ))}
+          {linkedHeroines.map(
+            (heroine) =>
+              heroine && (
+                <Link
+                  key={heroine.id}
+                  href={`/heroines/${heroine.slug}`}
+                  className="rounded-2xl border border-[var(--navy)]/10 bg-white p-4 transition hover:border-[var(--gold)]"
+                >
+                  <p className="text-xs font-medium text-[var(--gold-dark)]">
+                    {heroine.story}
+                  </p>
+                  <p className="text-lg font-semibold text-[var(--navy)]">
+                    {heroine.name}
+                  </p>
+                  <p className="mt-1 text-sm text-[var(--navy)]/65">
+                    {heroine.shortDescription}
+                  </p>
+                </Link>
+              ),
+          )}
         </div>
       </section>
 
@@ -125,8 +145,12 @@ export default async function ProfessionPage ({ params }: PageProps) {
                 className="flex items-center justify-between gap-3 rounded-2xl border border-[var(--navy)]/10 bg-white p-4 transition hover:border-[var(--gold)]"
               >
                 <div>
-                  <p className="font-semibold text-[var(--navy)]">{item.institution}</p>
-                  <p className="text-sm text-[var(--navy)]/60">Узнать о специальности →</p>
+                  <p className="font-semibold text-[var(--navy)]">
+                    {item.institution}
+                  </p>
+                  <p className="text-sm text-[var(--navy)]/60">
+                    Узнать о специальности →
+                  </p>
                 </div>
                 <ExternalLink className="h-4 w-4 shrink-0 text-[var(--navy)]/50" />
               </a>
@@ -144,5 +168,5 @@ export default async function ProfessionPage ({ params }: PageProps) {
         </Link>
       </div>
     </div>
-  )
+  );
 }

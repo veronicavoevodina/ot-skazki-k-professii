@@ -31,11 +31,19 @@
 body {
   background-color: var(--milk);
   background-image:
-    linear-gradient(180deg, rgba(251, 247, 240, 0.72) 0%, rgba(245, 239, 228, 0.78) 100%),
+    linear-gradient(
+      180deg,
+      rgba(251, 247, 240, 0.9) 0%,
+      rgba(245, 239, 228, 0.92) 100%
+    ),
     url("/patterns/national-embroidered-pattern.jpg");
-  background-size: auto, 380px auto;
+  background-size:
+    auto,
+    380px auto;
   background-repeat: no-repeat, repeat;
-  background-position: center, center top;
+  background-position:
+    center,
+    center top;
   background-attachment: fixed, fixed;
   color: var(--foreground);
   font-family: var(--font-body), system-ui, sans-serif;
@@ -114,7 +122,6 @@ h3 {
   padding: 0.85rem 1.35rem;
   font-weight: 700;
   color: #fffdf9;
-  box-shadow: 0 4px 0 var(--red-deep);
   transition:
     background 0.15s ease,
     transform 0.15s ease,

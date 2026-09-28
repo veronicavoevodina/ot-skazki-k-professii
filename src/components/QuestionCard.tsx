@@ -1,19 +1,19 @@
-'use client'
+"use client";
 
-import type { Question } from '@/lib/types'
-import { AnswerOption } from '@/components/AnswerOption'
+import type { Question } from "@/lib/types";
+import { AnswerOption } from "@/components/AnswerOption";
 
 interface QuestionCardProps {
-  question: Question
-  questionNumber: number
-  total: number
-  selectedAnswerId?: string
-  onSelect: (answerId: string) => void
+  question: Question;
+  questionNumber: number;
+  total: number;
+  selectedAnswerId?: string;
+  onSelect: (answerId: string) => void;
 }
 
-const LETTERS = ['А', 'Б', 'В', 'Г']
+const LETTERS = ["А", "Б", "В", "Г"];
 
-export function QuestionCard ({
+export function QuestionCard({
   question,
   questionNumber,
   total,
@@ -27,7 +27,7 @@ export function QuestionCard ({
         style={{ backgroundColor: `${question.themeColor}14` }}
       >
         <span
-          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[var(--red)]/15 bg-[var(--card)] text-3xl shadow-sm"
+          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[var(--red)]/15 bg-[var(--card)] text-3xl"
           aria-hidden
         >
           {question.themeEmoji}
@@ -36,7 +36,9 @@ export function QuestionCard ({
           <p className="text-xs font-bold uppercase tracking-wide text-[var(--red)]">
             Испытание {questionNumber} из {total}
           </p>
-          <p className="text-sm font-semibold text-[var(--navy)]">{question.themeLabel}</p>
+          <p className="text-sm font-semibold text-[var(--navy)]">
+            {question.themeLabel}
+          </p>
         </div>
       </div>
 
@@ -57,5 +59,5 @@ export function QuestionCard ({
         </div>
       </div>
     </div>
-  )
+  );
 }
