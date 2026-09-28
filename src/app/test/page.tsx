@@ -81,14 +81,14 @@ export default function TestPage () {
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12">
       <div className="mb-6 text-center">
-        <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-sm font-semibold text-[var(--navy)] shadow-sm">
+        <div className="section-label mb-2">
           <Sparkles className="h-4 w-4 text-[var(--gold-dark)]" />
           Волшебное путешествие
         </div>
       </div>
 
       <div className="mb-6">
-        <div className="mb-2 flex items-center justify-between text-sm text-[var(--navy)]/70">
+        <div className="mb-2 flex items-center justify-between text-sm font-semibold text-[var(--navy)]/70">
           <span>
             Испытание {currentIndex + 1} из {total}
           </span>
@@ -97,7 +97,7 @@ export default function TestPage () {
         <ProgressBar
           value={currentIndex + 1}
           max={total}
-          color="var(--gold)"
+          color="var(--red)"
         />
       </div>
 
@@ -114,7 +114,7 @@ export default function TestPage () {
           type="button"
           onClick={handleBack}
           disabled={!canGoBack || isFinishing}
-          className="inline-flex items-center gap-2 rounded-2xl border border-[var(--navy)]/15 bg-white px-4 py-2.5 text-sm font-semibold text-[var(--navy)] transition enabled:hover:border-[var(--gold)] disabled:cursor-not-allowed disabled:opacity-40"
+          className="btn-secondary !px-4 !py-2.5 text-sm disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:transform-none"
         >
           <ArrowLeft className="h-4 w-4" />
           Назад

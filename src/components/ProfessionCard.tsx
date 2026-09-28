@@ -20,9 +20,9 @@ export function ProfessionCard ({
   const keyQualities = getProfessionKeyQualities(profession)
 
   return (
-    <article className="flex h-full flex-col rounded-3xl border border-[var(--navy)]/10 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+    <article className="folk-card folk-card-frame flex h-full flex-col p-5">
       <div className="mb-3 flex items-start gap-3">
-        <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--cream)] text-2xl">
+        <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--red)]/15 bg-[var(--linen)] text-2xl">
           {profession.icon}
         </span>
         <div>
@@ -43,10 +43,7 @@ export function ProfessionCard ({
 
       <div className="mb-4 flex flex-wrap gap-2">
         {keyQualities.map((id: QualityId) => (
-          <span
-            key={id}
-            className="inline-flex items-center gap-1 rounded-full bg-[var(--cream)] px-2.5 py-1 text-xs text-[var(--navy)]"
-          >
+          <span key={id} className="chip">
             <span aria-hidden>{qualities[id].emoji}</span>
             {qualities[id].name}
           </span>
@@ -55,7 +52,7 @@ export function ProfessionCard ({
 
       <Link
         href={`/professions/${profession.slug}`}
-        className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-[var(--navy)] hover:text-[var(--gold-dark)]"
+        className="mt-auto inline-flex items-center gap-1 text-sm font-bold text-[var(--red)] hover:text-[var(--red-deep)]"
       >
         Подробнее
         <ArrowRight className="h-4 w-4" />

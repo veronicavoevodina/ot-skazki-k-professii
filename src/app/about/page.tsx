@@ -8,7 +8,7 @@ export default function AboutPage() {
         Исследовательская работа
       </p>
       <h1 className="text-3xl font-semibold text-[var(--navy)] sm:text-4xl">
-        Мудрость женщин в сказках: какие качества помогают людям сегодня?
+        От сказки к профессии
       </h1>
 
       <div className="mt-8 space-y-8 leading-relaxed text-[var(--navy)]/80">
@@ -24,7 +24,7 @@ export default function AboutPage() {
           </p>
         </section>
 
-        <section className="rounded-3xl border border-[var(--navy)]/10 bg-white p-5 shadow-sm">
+        <section className="folk-card p-5">
           <h2 className="mb-3 text-xl font-semibold text-[var(--navy)]">
             🔍 Что исследует проект
           </h2>
@@ -47,26 +47,26 @@ export default function AboutPage() {
             ✨ Как работает приложение
           </h2>
           <ol className="list-none space-y-3">
-            <li className="flex gap-3 rounded-2xl bg-white/80 px-4 py-3 shadow-sm">
-              <span className="font-semibold text-[var(--gold-dark)]">1.</span>
+            <li className="folk-card flex gap-3 px-4 py-3">
+              <span className="font-bold text-[var(--red)]">1.</span>
               <span>
                 Ты попадаешь в сказочную ситуацию и выбираешь, как поступил бы.
               </span>
             </li>
-            <li className="flex gap-3 rounded-2xl bg-white/80 px-4 py-3 shadow-sm">
-              <span className="font-semibold text-[var(--gold-dark)]">2.</span>
+            <li className="folk-card flex gap-3 px-4 py-3">
+              <span className="font-bold text-[var(--red)]">2.</span>
               <span>
                 После ответов видно, какие качества проявились в твоих выборах.
               </span>
             </li>
-            <li className="flex gap-3 rounded-2xl bg-white/80 px-4 py-3 shadow-sm">
-              <span className="font-semibold text-[var(--gold-dark)]">3.</span>
+            <li className="folk-card flex gap-3 px-4 py-3">
+              <span className="font-bold text-[var(--red)]">3.</span>
               <span>
                 Можно узнать, на качества какой сказочной героини они похожи.
               </span>
             </li>
-            <li className="flex gap-3 rounded-2xl bg-white/80 px-4 py-3 shadow-sm">
-              <span className="font-semibold text-[var(--gold-dark)]">4.</span>
+            <li className="folk-card flex gap-3 px-4 py-3">
+              <span className="font-bold text-[var(--red)]">4.</span>
               <span>
                 Можно познакомиться с профессиями, где такие качества могут
                 пригодиться.
@@ -75,7 +75,7 @@ export default function AboutPage() {
           </ol>
         </section>
 
-        <section className="rounded-3xl border border-[var(--navy)]/10 bg-white p-5 shadow-sm">
+        <section className="folk-card p-5">
           <h2 className="mb-3 text-xl font-semibold text-[var(--navy)]">
             📖 Какие героини участвуют
           </h2>
@@ -109,8 +109,8 @@ export default function AboutPage() {
           </p>
         </section>
 
-        <section className="rounded-3xl border border-[var(--gold)]/30 bg-[var(--cream)] p-5">
-          <p className="font-medium text-[var(--navy)]">
+        <section className="rounded-3xl border border-[var(--red)]/20 bg-[var(--linen)] p-5">
+          <p className="font-semibold text-[var(--navy)]">
             Приложение помогает узнать свои сильные стороны и познакомиться с
             профессиями, в которых такие качества могут пригодиться.
           </p>
@@ -121,7 +121,7 @@ export default function AboutPage() {
           </p>
         </section>
 
-        <section className="rounded-3xl border border-[var(--navy)]/10 bg-white p-5 shadow-sm">
+        <section className="folk-card folk-card-frame p-5">
           <h2 className="mb-3 text-xl font-semibold text-[var(--navy)]">
             ✏️ Об авторе
           </h2>
@@ -132,23 +132,14 @@ export default function AboutPage() {
       </div>
 
       <div className="mt-10 flex flex-wrap gap-3">
-        <Link
-          href="/test"
-          className="inline-flex items-center gap-2 rounded-2xl bg-[var(--navy)] px-5 py-3 font-semibold text-white"
-        >
+        <Link href="/test" className="btn-primary">
           Начать тест
           <ArrowRight className="h-4 w-4" />
         </Link>
-        <Link
-          href="/heroines"
-          className="inline-flex rounded-2xl border border-[var(--navy)]/15 bg-white px-5 py-3 font-semibold text-[var(--navy)]"
-        >
+        <Link href="/heroines" className="btn-secondary">
           Героини
         </Link>
-        <Link
-          href="/professions"
-          className="inline-flex rounded-2xl border border-[var(--navy)]/15 bg-white px-5 py-3 font-semibold text-[var(--navy)]"
-        >
+        <Link href="/professions" className="btn-secondary">
           Профессии
         </Link>
       </div>

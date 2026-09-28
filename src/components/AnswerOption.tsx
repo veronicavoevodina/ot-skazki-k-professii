@@ -12,20 +12,22 @@ export function AnswerOption ({ letter, text, selected, onSelect }: AnswerOption
     <button
       type="button"
       onClick={onSelect}
-      className={`flex w-full items-start gap-3 rounded-2xl border px-4 py-3 text-left transition ${
+      className={`flex w-full items-start gap-3 rounded-2xl border-2 px-4 py-3.5 text-left transition ${
         selected
-          ? 'border-[var(--navy)] bg-[var(--navy)] text-white shadow-md'
-          : 'border-[var(--navy)]/15 bg-white text-[var(--navy)] hover:border-[var(--gold)] hover:bg-[var(--gold)]/10'
+          ? 'border-[var(--red)] bg-[var(--red)] text-white shadow-[0_3px_0_var(--red-deep)]'
+          : 'border-[var(--navy)]/12 bg-[var(--card)] text-[var(--navy)] hover:border-[var(--red)]/45 hover:bg-[#fff8f0]'
       }`}
     >
       <span
-        className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-sm font-semibold ${
-          selected ? 'bg-[var(--gold)] text-[var(--navy)]' : 'bg-[var(--cream)] text-[var(--navy)]'
+        className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-extrabold ${
+          selected
+            ? 'bg-[var(--gold)] text-[var(--ink)]'
+            : 'bg-[var(--linen)] text-[var(--navy)]'
         }`}
       >
         {letter}
       </span>
-      <span className="text-sm leading-relaxed sm:text-base">{text}</span>
+      <span className="text-sm font-semibold leading-relaxed sm:text-base">{text}</span>
     </button>
   )
 }

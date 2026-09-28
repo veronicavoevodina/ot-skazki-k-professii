@@ -21,22 +21,22 @@ export function QuestionCard ({
   onSelect,
 }: QuestionCardProps) {
   return (
-    <div className="overflow-hidden rounded-3xl border border-[var(--navy)]/10 bg-white shadow-sm">
+    <div className="folk-card overflow-hidden">
       <div
-        className="flex items-center gap-3 px-5 py-4 sm:px-8"
-        style={{ backgroundColor: `${question.themeColor}18` }}
+        className="flex items-center gap-3 border-b border-[var(--red)]/10 px-5 py-4 sm:px-8"
+        style={{ backgroundColor: `${question.themeColor}14` }}
       >
         <span
-          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white text-2xl shadow-sm"
+          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[var(--red)]/15 bg-[var(--card)] text-3xl shadow-sm"
           aria-hidden
         >
           {question.themeEmoji}
         </span>
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--navy)]/55">
+          <p className="text-xs font-bold uppercase tracking-wide text-[var(--red)]">
             Испытание {questionNumber} из {total}
           </p>
-          <p className="text-sm font-medium text-[var(--navy)]">{question.themeLabel}</p>
+          <p className="text-sm font-semibold text-[var(--navy)]">{question.themeLabel}</p>
         </div>
       </div>
 

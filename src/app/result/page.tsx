@@ -57,7 +57,7 @@ export default function ResultPage () {
         </p>
         <Link
           href="/test"
-          className="inline-flex rounded-2xl bg-[var(--navy)] px-5 py-3 font-semibold text-white"
+          className="btn-primary"
         >
           Начать путешествие
         </Link>
@@ -72,7 +72,7 @@ export default function ResultPage () {
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-14">
       <div className="mb-8">
-        <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-sm font-semibold text-[var(--navy)] shadow-sm">
+        <div className="mb-3 section-label">
           <Sparkles className="h-4 w-4 text-[var(--gold-dark)]" />
           Результат путешествия
         </div>
@@ -89,7 +89,7 @@ export default function ResultPage () {
           {qualityCards.map((item) => (
             <div
               key={item.id}
-              className="rounded-3xl border border-[var(--navy)]/10 bg-white p-5 shadow-sm"
+              className="folk-card folk-card-frame p-5"
             >
               <div className="mb-2 flex items-center gap-2 text-lg font-semibold text-[var(--navy)]">
                 <span aria-hidden>{item.emoji}</span>
@@ -102,8 +102,8 @@ export default function ResultPage () {
       </ResultSection>
 
       <ResultSection title="🌟 Твой сказочный образ">
-        <div className="rounded-3xl border border-[var(--navy)]/10 bg-white p-6 shadow-sm">
-          <p className="mb-1 text-sm font-medium text-[var(--gold-dark)]">
+        <div className="folk-card folk-card-frame p-6">
+          <p className="mb-1 text-sm font-bold text-[var(--red)]">
             {heroine.heroine.story}
           </p>
           <h3 className="mb-3 text-2xl font-semibold text-[var(--navy)]">
@@ -119,7 +119,7 @@ export default function ResultPage () {
             {heroine.sharedQualities.map((id) => (
               <span
                 key={id}
-                className="inline-flex items-center gap-1 rounded-full bg-[var(--cream)] px-2.5 py-1 text-xs text-[var(--navy)]"
+                className="chip"
               >
                 <span aria-hidden>{qualities[id].emoji}</span>
                 {qualities[id].name}
@@ -128,7 +128,7 @@ export default function ResultPage () {
           </div>
           <Link
             href={`/heroines/${heroine.heroine.slug}`}
-            className="text-sm font-semibold text-[var(--navy)] hover:text-[var(--gold-dark)]"
+            className="text-sm font-bold text-[var(--red)] hover:text-[var(--red-deep)]"
           >
             Познакомиться с героиней →
           </Link>
@@ -151,7 +151,7 @@ export default function ResultPage () {
         </div>
       </ResultSection>
 
-      <section className="mb-10 rounded-3xl border border-[var(--navy)]/10 bg-white p-6 shadow-sm">
+      <section className="folk-card mb-10 p-6">
         <h2 className="mb-3 text-2xl font-semibold text-[var(--navy)]">
           📚 А при чём здесь сказки?
         </h2>
@@ -172,14 +172,14 @@ export default function ResultPage () {
         <div className="flex flex-wrap gap-3">
           <Link
             href="/professions"
-            className="inline-flex items-center gap-2 rounded-2xl bg-[var(--navy)] px-5 py-3 font-semibold text-white"
+            className="btn-primary"
           >
             <BookOpen className="h-4 w-4" />
             Посмотреть профессии
           </Link>
           <Link
             href="/heroines"
-            className="inline-flex items-center gap-2 rounded-2xl border border-[var(--navy)]/15 bg-white px-5 py-3 font-semibold text-[var(--navy)]"
+            className="btn-secondary"
           >
             <Users className="h-4 w-4" />
             Познакомиться с героинями
@@ -187,7 +187,7 @@ export default function ResultPage () {
           <button
             type="button"
             onClick={handleRetake}
-            className="inline-flex items-center gap-2 rounded-2xl border border-[var(--navy)]/15 bg-white px-5 py-3 font-semibold text-[var(--navy)]"
+            className="btn-secondary"
           >
             <RefreshCw className="h-4 w-4" />
             Пройти тест ещё раз
@@ -195,7 +195,7 @@ export default function ResultPage () {
         </div>
       </ResultSection>
 
-      <div className="rounded-2xl border border-[var(--navy)]/10 bg-white/80 p-4 text-sm leading-relaxed text-[var(--navy)]/70">
+      <div className="rounded-2xl border border-[var(--red)]/15 bg-[var(--linen)]/70 p-4 text-sm leading-relaxed text-[var(--navy)]/70">
         Этот тест не выбирает профессию за тебя. Он помогает заметить качества,
         которые могут пригодиться в разных делах и профессиях.
       </div>

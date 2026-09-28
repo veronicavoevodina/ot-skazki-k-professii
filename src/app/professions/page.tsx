@@ -30,10 +30,10 @@ export default function ProfessionsPage () {
         <button
           type="button"
           onClick={() => setFilter('all')}
-          className={`rounded-full px-3 py-1.5 text-sm transition ${
+          className={`rounded-full px-3 py-1.5 text-sm font-semibold transition ${
             filter === 'all'
-              ? 'bg-[var(--navy)] text-white'
-              : 'bg-white text-[var(--navy)] hover:bg-[var(--navy)]/5'
+              ? 'bg-[var(--red)] text-white shadow-[0_2px_0_var(--red-deep)]'
+              : 'bg-[var(--card)] text-[var(--navy)] hover:bg-[var(--linen)]'
           }`}
         >
           Все
@@ -43,10 +43,10 @@ export default function ProfessionsPage () {
             key={quality.id}
             type="button"
             onClick={() => setFilter(quality.id)}
-            className={`rounded-full px-3 py-1.5 text-sm transition ${
+            className={`rounded-full px-3 py-1.5 text-sm font-semibold transition ${
               filter === quality.id
-                ? 'bg-[var(--navy)] text-white'
-                : 'bg-white text-[var(--navy)] hover:bg-[var(--navy)]/5'
+                ? 'bg-[var(--red)] text-white shadow-[0_2px_0_var(--red-deep)]'
+                : 'bg-[var(--card)] text-[var(--navy)] hover:bg-[var(--linen)]'
             }`}
           >
             {quality.emoji} {quality.name}

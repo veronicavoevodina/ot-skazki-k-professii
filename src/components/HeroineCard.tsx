@@ -11,8 +11,8 @@ export function HeroineCard ({ heroine }: HeroineCardProps) {
   const qualityIds = Object.keys(heroine.qualities) as QualityId[]
 
   return (
-    <article className="flex h-full flex-col rounded-3xl border border-[var(--navy)]/10 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
-      <p className="mb-1 text-xs font-medium uppercase tracking-wide text-[var(--gold-dark)]">
+    <article className="folk-card folk-card-frame flex h-full flex-col p-5">
+      <p className="mb-1 text-xs font-bold uppercase tracking-wide text-[var(--red)]">
         {heroine.story}
       </p>
       <h3 className="mb-2 text-xl font-semibold text-[var(--navy)]">{heroine.name}</h3>
@@ -22,10 +22,7 @@ export function HeroineCard ({ heroine }: HeroineCardProps) {
 
       <div className="mb-4 flex flex-wrap gap-2">
         {qualityIds.map((id) => (
-          <span
-            key={id}
-            className="inline-flex items-center gap-1 rounded-full bg-[var(--cream)] px-2.5 py-1 text-xs text-[var(--navy)]"
-          >
+          <span key={id} className="chip">
             <span aria-hidden>{qualities[id].emoji}</span>
             {qualities[id].name}
           </span>
@@ -34,7 +31,7 @@ export function HeroineCard ({ heroine }: HeroineCardProps) {
 
       <Link
         href={`/heroines/${heroine.slug}`}
-        className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-[var(--navy)] hover:text-[var(--gold-dark)]"
+        className="mt-auto inline-flex items-center gap-1 text-sm font-bold text-[var(--red)] hover:text-[var(--red-deep)]"
       >
         Узнать больше
         <ArrowRight className="h-4 w-4" />

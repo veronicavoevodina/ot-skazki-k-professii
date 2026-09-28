@@ -1,38 +1,205 @@
 @import "tailwindcss";
 
 :root {
-  --navy: #1e3a5f;
-  --navy-soft: #2a4a73;
-  --gold: #d4a84b;
-  --gold-dark: #b8860b;
-  --cream: #f7f1e8;
-  --green: #3d6b4f;
-  --background: #f7f1e8;
-  --foreground: #1e3a5f;
+  /* Белорусская палитра */
+  --milk: #fbf7f0;
+  --linen: #ede6d9;
+  --cream: #fbf7f0;
+  --red: #b31b2c;
+  --red-soft: #c9424f;
+  --red-deep: #8f1523;
+  --navy: #1e4a38;
+  --navy-soft: #2a5f48;
+  --green: #1e4a38;
+  --green-soft: #3d6b54;
+  --gold: #c9a84c;
+  --gold-dark: #a8872e;
+  --ink: #2a241c;
+  --background: #fbf7f0;
+  --foreground: #1e4a38;
+  --card: #fffdf9;
+  --ornament: #b31b2c;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-source-sans);
-  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
 }
 
 body {
-  background:
-    radial-gradient(circle at top right, rgba(212, 168, 75, 0.18), transparent 35%),
-    radial-gradient(circle at 10% 20%, rgba(61, 107, 79, 0.08), transparent 30%),
-    var(--cream);
+  background-color: var(--milk);
+  background-image:
+    linear-gradient(180deg, rgba(251, 247, 240, 0.72) 0%, rgba(245, 239, 228, 0.78) 100%),
+    url("/patterns/national-embroidered-pattern.jpg");
+  background-size: auto, 380px auto;
+  background-repeat: no-repeat, repeat;
+  background-position: center, center top;
+  background-attachment: fixed, fixed;
   color: var(--foreground);
-  font-family: var(--font-source-sans), system-ui, sans-serif;
+  font-family: var(--font-body), system-ui, sans-serif;
 }
 
 h1,
 h2,
 h3 {
-  font-family: var(--font-fraunces), Georgia, serif;
+  font-family: var(--font-display), Georgia, serif;
+  letter-spacing: -0.01em;
 }
 
 ::selection {
-  background: rgba(212, 168, 75, 0.35);
+  background: rgba(179, 27, 44, 0.18);
+}
+
+/* Карточка в народном стиле */
+.folk-card {
+  position: relative;
+  background: var(--card);
+  border: 1px solid rgba(30, 74, 56, 0.12);
+  border-radius: 1.25rem;
+  box-shadow:
+    0 1px 0 rgba(179, 27, 44, 0.06),
+    0 8px 24px rgba(42, 36, 28, 0.05);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.folk-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(179, 27, 44, 0.22);
+  box-shadow:
+    0 1px 0 rgba(179, 27, 44, 0.1),
+    0 12px 28px rgba(42, 36, 28, 0.08);
+}
+
+.folk-card-frame {
+  position: relative;
+}
+
+.folk-card-frame::before,
+.folk-card-frame::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--red);
+  border-style: solid;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.folk-card-frame::before {
+  top: 10px;
+  left: 10px;
+  border-width: 2px 0 0 2px;
+}
+
+.folk-card-frame::after {
+  right: 10px;
+  bottom: 10px;
+  border-width: 0 2px 2px 0;
+}
+
+/* Кнопки */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 1rem;
+  background: var(--red);
+  padding: 0.85rem 1.35rem;
+  font-weight: 700;
+  color: #fffdf9;
+  box-shadow: 0 4px 0 var(--red-deep);
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.btn-primary:hover {
+  background: var(--red-soft);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 0 var(--red-deep);
+}
+
+.btn-primary:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--red-deep);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 1rem;
+  border: 2px solid rgba(30, 74, 56, 0.2);
+  background: var(--card);
+  padding: 0.8rem 1.25rem;
+  font-weight: 700;
+  color: var(--navy);
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--red);
+  background: #fff8f0;
+  transform: translateY(-1px);
+}
+
+.btn-secondary:active {
+  transform: translateY(1px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 1rem;
+  padding: 0.8rem 1.25rem;
+  font-weight: 700;
+  color: var(--navy);
+  opacity: 0.85;
+  transition:
+    background 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.btn-ghost:hover {
+  background: rgba(30, 74, 56, 0.06);
+  opacity: 1;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 999px;
+  background: var(--linen);
+  padding: 0.25rem 0.7rem;
+  font-size: 0.75rem;
+  color: var(--navy);
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(179, 27, 44, 0.18);
+  background: rgba(255, 253, 249, 0.85);
+  padding: 0.35rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--navy);
+  box-shadow: 0 1px 0 rgba(201, 168, 76, 0.25);
 }
