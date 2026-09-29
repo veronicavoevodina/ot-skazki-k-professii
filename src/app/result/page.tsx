@@ -2,16 +2,10 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useSyncExternalStore } from 'react'
-import { BookOpen, RefreshCw, Sparkles, Users } from 'lucide-react'
-import { ProfessionCard } from '@/components/ProfessionCard'
+import { useMemo, useSyncExternalStore } from 'react'
 import { ResultSection } from '@/components/ResultSection'
-import { qualities } from '@/data/qualities'
-import {
-  buildHeroineMatchText,
-  buildProfessionInterestText,
-  getKidQualityCards,
-} from '@/lib/copy'
+import { qualityInfo, collectRelatedProfessions } from '@/data/qualityInfo'
+import { getLeadingQualities } from '@/lib/calculateScores'
 import { clearTestResult, loadTestResult } from '@/lib/storage'
 import type { TestResult } from '@/lib/types'
 
@@ -33,6 +27,28 @@ export default function ResultPage () {
   const isClient = useIsClient()
   const result = useStoredResult()
 
+  const view = useMemo(() => {
+    if (!result) return null
+
+    const leadingIds =
+      result.leadingQualities?.length > 0
+        ? result.leadingQualities
+        : getLeadingQualities(result.qualityScores)
+
+    return {
+      qualityCards: leadingIds.map((id) => ({
+        id,
+        name: qualityInfo[id].label,
+        phrase: qualityInfo[id].description,
+      })),
+      // всегда заново — без icon из старого localStorage
+      relatedProfessions: collectRelatedProfessions(leadingIds).map(({ title, slug }) => ({
+        title,
+        slug,
+      })),
+    }
+  }, [result])
+
   function handleRetake () {
     clearTestResult()
     router.push('/test')
@@ -40,162 +56,110 @@ export default function ResultPage () {
 
   if (!isClient) {
     return (
-      <div className="mx-auto max-w-4xl px-4 py-16 text-center text-[var(--navy)]/70">
+      <div className="mx-auto max-w-4xl px-4 py-16 text-center text-[var(--muted)]">
         Загружаем результат…
       </div>
     )
   }
 
-  if (!result) {
+  if (!result || !view) {
     return (
       <div className="mx-auto max-w-xl px-4 py-16 text-center">
-        <h1 className="mb-3 text-3xl font-semibold text-[var(--navy)]">
+        <h1 className="mb-3 text-3xl font-semibold">
           Путешествие ещё не началось
         </h1>
-        <p className="mb-6 text-[var(--navy)]/70">
+        <p className="mb-6 text-[var(--muted)]">
           Ответь на вопросы — и узнаешь, какие качества проявились в твоих ответах.
         </p>
-        <Link
-          href="/test"
-          className="btn-primary"
-        >
+        <Link href="/test" className="btn-primary">
           Начать путешествие
         </Link>
       </div>
     )
   }
 
-  const qualityCards = getKidQualityCards(result.qualityScores, 3)
-  const primary = result.professionMatches.slice(0, 3)
-  const heroine = result.heroineMatch
-
   return (
-    <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-14">
+    <div className="result-page mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-14">
       <div className="mb-8">
-        <div className="mb-3 section-label">
-          <Sparkles className="h-4 w-4 text-[var(--gold-dark)]" />
-          Результат путешествия
-        </div>
-        <h1 className="text-3xl font-semibold text-[var(--navy)] sm:text-4xl">
-          🌟 Твои качества
-        </h1>
-        <p className="mt-3 max-w-3xl text-[var(--navy)]/75">
-          Посмотри, что особенно заметно в твоих ответах.
+        <div className="mb-3 section-label">Результат путешествия</div>
+        <h1 className="text-3xl sm:text-4xl">Твои сильные качества</h1>
+        <span className="heading-accent" aria-hidden />
+        <p className="mt-4 max-w-3xl text-[var(--muted)]">
+          По твоим ответам чаще всего проявились:
         </p>
       </div>
 
       <ResultSection title="">
-        <div className="grid gap-3 sm:grid-cols-3">
-          {qualityCards.map((item) => (
-            <div
-              key={item.id}
-              className="folk-card folk-card-frame p-5"
-            >
-              <div className="mb-2 flex items-center gap-2 text-lg font-semibold text-[var(--navy)]">
-                <span aria-hidden>{item.emoji}</span>
-                {item.name}
-              </div>
-              <p className="text-sm leading-relaxed text-[var(--navy)]/75">{item.phrase}</p>
+        <div
+          className={`grid gap-3 ${
+            view.qualityCards.length > 3
+              ? 'sm:grid-cols-2 lg:grid-cols-4'
+              : 'sm:grid-cols-3'
+          }`}
+        >
+          {view.qualityCards.map((item) => (
+            <div key={item.id} className="folk-card p-5">
+              <h3 className="mb-2 text-lg">{item.name}</h3>
+              <p className="text-sm leading-relaxed text-[var(--muted)]">{item.phrase}</p>
             </div>
           ))}
         </div>
       </ResultSection>
 
-      <ResultSection title="🌟 Твой сказочный образ">
-        <div className="folk-card folk-card-frame p-6">
-          <p className="mb-1 text-sm font-bold text-[var(--red)]">
-            {heroine.heroine.story}
-          </p>
-          <h3 className="mb-3 text-2xl font-semibold text-[var(--navy)]">
-            {heroine.heroine.name}
-          </h3>
-          <p className="mb-4 leading-relaxed text-[var(--navy)]/80">
-            {buildHeroineMatchText(heroine)}
-          </p>
-          <p className="mb-4 text-sm text-[var(--navy)]/60">
-            Твой профиль качеств похож на качества {heroine.heroine.name}.
-          </p>
-          <div className="mb-4 flex flex-wrap gap-2">
-            {heroine.sharedQualities.map((id) => (
-              <span
-                key={id}
-                className="chip"
-              >
-                <span aria-hidden>{qualities[id].emoji}</span>
-                {qualities[id].name}
-              </span>
-            ))}
-          </div>
-          <Link
-            href={`/heroines/${heroine.heroine.slug}`}
-            className="text-sm font-bold text-[var(--red)] hover:text-[var(--red-deep)]"
-          >
-            Познакомиться с героиней →
-          </Link>
-        </div>
-      </ResultSection>
-
       <ResultSection
-        title="🚀 А где эти качества могут пригодиться?"
-        subtitle="Твои качества могут быть полезны в разных профессиях. Вот несколько, о которых можно узнать больше:"
+        title="Где эти качества могут пригодиться?"
+        subtitle="Такие качества важны в разных профессиях. Узнай больше!"
       >
-        <div className="grid gap-4 md:grid-cols-3">
-          {primary.map(({ profession }) => (
-            <ProfessionCard
-              key={profession.id}
-              profession={profession}
-              interestText={buildProfessionInterestText(profession)}
-              compact
-            />
-          ))}
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {view.relatedProfessions.map((item) => {
+            const card = (
+              <div className="folk-card p-4">
+                <p className="font-semibold text-[var(--color-dark)]">{item.title}</p>
+              </div>
+            )
+
+            if (item.slug) {
+              return (
+                <Link key={item.title} href={`/professions/${item.slug}`}>
+                  {card}
+                </Link>
+              )
+            }
+
+            return <div key={item.title}>{card}</div>
+          })}
         </div>
       </ResultSection>
 
       <section className="folk-card mb-10 p-6">
-        <h2 className="mb-3 text-2xl font-semibold text-[var(--navy)]">
-          📚 А при чём здесь сказки?
-        </h2>
-        <div className="space-y-3 leading-relaxed text-[var(--navy)]/80">
-          <p>В сказках героиням тоже приходится решать трудные задачи.</p>
+        <h2 className="mb-3 text-2xl">Откуда взялись эти качества?</h2>
+        <span className="heading-accent mb-4" aria-hidden />
+        <div className="space-y-3 leading-relaxed text-[var(--muted)]">
+          <p>Мы нашли эти качества, когда изучали поступки героинь сказок.</p>
           <p>
-            Василисе помогают ум и находчивость. Герде — смелость и настойчивость.
-            Хаврошечке — трудолюбие. Дюймовочке — доброта и любознательность.
-          </p>
-          <p>
-            Мы сравнили эти качества с твоими ответами и посмотрели, где они могут
-            пригодиться сегодня.
+            Герда проявляет смелость и настойчивость. Василиса Премудрая — ум и
+            находчивость. Настенька — доброту, терпение и трудолюбие.
+            Хаврошечка — трудолюбие и терпение. Дюймовочка — доброту и
+            любознательность. Царевна-лягушка — находчивость и мастерство.
           </p>
         </div>
       </section>
 
       <ResultSection title="Продолжить путешествие">
         <div className="flex flex-wrap gap-3">
-          <Link
-            href="/professions"
-            className="btn-primary"
-          >
-            <BookOpen className="h-4 w-4" />
+          <Link href="/professions" className="btn-primary">
             Посмотреть профессии
           </Link>
-          <Link
-            href="/heroines"
-            className="btn-secondary"
-          >
-            <Users className="h-4 w-4" />
+          <Link href="/heroines" className="btn-secondary">
             Познакомиться с героинями
           </Link>
-          <button
-            type="button"
-            onClick={handleRetake}
-            className="btn-secondary"
-          >
-            <RefreshCw className="h-4 w-4" />
+          <button type="button" onClick={handleRetake} className="btn-secondary">
             Пройти тест ещё раз
           </button>
         </div>
       </ResultSection>
 
-      <div className="rounded-2xl border border-[var(--red)]/15 bg-[var(--linen)]/70 p-4 text-sm leading-relaxed text-[var(--navy)]/70">
+      <div className="rounded-[12px] border border-[var(--border)] bg-[rgba(196,163,90,0.12)] p-4 text-sm leading-relaxed text-[var(--muted)]">
         Этот тест не выбирает профессию за тебя. Он помогает заметить качества,
         которые могут пригодиться в разных делах и профессиях.
       </div>

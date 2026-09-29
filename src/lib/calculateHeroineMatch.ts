@@ -1,5 +1,5 @@
 import { heroines } from '@/data/heroines'
-import { QUALITY_IDS } from '@/data/qualities'
+import { getLeadingQualities } from '@/lib/calculateScores'
 import type { HeroineMatch, QualityId, QualityScores } from '@/lib/types'
 
 export function calculateHeroineMatches (
@@ -42,10 +42,7 @@ export function calculateHeroineMatch (
 
 export function getTopUserQualities (
   qualityScores: QualityScores,
-  count = 4
+  count = 3
 ): QualityId[] {
-  return QUALITY_IDS
-    .slice()
-    .sort((a, b) => qualityScores[b] - qualityScores[a])
-    .slice(0, count)
+  return getLeadingQualities(qualityScores, count)
 }

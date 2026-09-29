@@ -1,19 +1,24 @@
-"use client";
+'use client'
 
-import type { Question } from "@/lib/types";
-import { AnswerOption } from "@/components/AnswerOption";
+import type { Question } from '@/lib/types'
+import { AnswerOption } from '@/components/AnswerOption'
 
 interface QuestionCardProps {
-  question: Question;
-  questionNumber: number;
-  total: number;
-  selectedAnswerId?: string;
-  onSelect: (answerId: string) => void;
+  question: Question
+  questionNumber: number
+  total: number
+  selectedAnswerId?: string
+  onSelect: (answerId: string) => void
 }
 
-const LETTERS = ["А", "Б", "В", "Г"];
+const LETTERS = [
+  { letter: 'А', name: 'Аз' },
+  { letter: 'Б', name: 'Буки' },
+  { letter: 'В', name: 'Веди' },
+  { letter: 'Г', name: 'Глаголь' },
+]
 
-export function QuestionCard({
+export function QuestionCard ({
   question,
   questionNumber,
   total,
@@ -21,43 +26,36 @@ export function QuestionCard({
   onSelect,
 }: QuestionCardProps) {
   return (
-    <div className="folk-card overflow-hidden">
-      <div
-        className="flex items-center gap-3 border-b border-[var(--red)]/10 px-5 py-4 sm:px-8"
-        style={{ backgroundColor: `${question.themeColor}14` }}
-      >
-        <span
-          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[var(--red)]/15 bg-[var(--card)] text-3xl"
-          aria-hidden
-        >
-          {question.themeEmoji}
-        </span>
-        <div>
-          <p className="text-xs font-bold uppercase tracking-wide text-[var(--red)]">
-            Испытание {questionNumber} из {total}
-          </p>
-          <p className="text-sm font-semibold text-[var(--navy)]">
-            {question.themeLabel}
-          </p>
-        </div>
+    <div className="folk-card folk-card-frame overflow-hidden">
+      <div className="border-b border-[var(--border)] px-5 py-4 sm:px-8">
+        <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-cinnabar)]">
+          Испытание {questionNumber} из {total}
+        </p>
+        <p className="mt-1 text-sm font-semibold text-[var(--color-dark)]">
+          {question.themeLabel}
+        </p>
       </div>
 
       <div className="p-5 sm:p-8">
-        <h2 className="mb-6 text-xl font-semibold leading-snug text-[var(--navy)] sm:text-2xl">
+        <h2 className="mb-6 text-xl leading-snug sm:text-2xl">
           {question.text}
         </h2>
         <div className="flex flex-col gap-3">
-          {question.answers.map((answer, index) => (
-            <AnswerOption
-              key={answer.id}
-              letter={LETTERS[index] ?? String(index + 1)}
-              text={answer.text}
-              selected={selectedAnswerId === answer.id}
-              onSelect={() => onSelect(answer.id)}
-            />
-          ))}
+          {question.answers.map((answer, index) => {
+            const mark = LETTERS[index] ?? { letter: String(index + 1), name: '' }
+            return (
+              <AnswerOption
+                key={answer.id}
+                letter={mark.letter}
+                letterName={mark.name}
+                text={answer.text}
+                selected={selectedAnswerId === answer.id}
+                onSelect={() => onSelect(answer.id)}
+              />
+            )
+          })}
         </div>
       </div>
     </div>
-  );
+  )
 }

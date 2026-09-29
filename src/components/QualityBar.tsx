@@ -14,13 +14,10 @@ export function QualityBar ({ id, score, maxScore }: QualityBarProps) {
   return (
     <div className="folk-card p-4">
       <div className="mb-2 flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2 font-semibold text-[var(--navy)]">
-          <span aria-hidden>{quality.emoji}</span>
-          <span>{quality.name}</span>
-        </div>
-        <span className="text-sm font-bold text-[var(--red)]">{score}</span>
+        <span className="font-semibold text-[var(--color-dark)]">{quality.name}</span>
+        <span className="text-sm font-bold text-[var(--color-green)]">{score}</span>
       </div>
-      <ProgressBar value={score} max={maxScore || 1} color={quality.color} />
+      <ProgressBar value={score} max={maxScore || 1} color="var(--color-green)" />
     </div>
   )
 }

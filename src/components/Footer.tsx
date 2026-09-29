@@ -1,29 +1,12 @@
-import Link from "next/link";
-
-export function Footer() {
+export function Footer () {
   return (
-    <footer className="mt-auto border-t border-[var(--red)]/12 bg-[var(--card)]">
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-6 text-sm text-[var(--navy)]/70 sm:flex-row sm:items-start sm:justify-between sm:px-6">
-        <div className="space-y-1">
-          <p className="font-semibold text-[var(--navy)]">
-            «От сказки к профессии»
-          </p>
-          <p>Исследовательский школьный проект</p>
-          <p>Автор: Воеводин Артем, ученик 2 «Б» класса</p>
-          <p>ГУО «Средняя школа №51 г. Минска»</p>
-        </div>
-        {/* <div className="flex flex-wrap gap-4 font-semibold">
-          <Link href="/about" className="hover:text-[var(--red)]">
-            О проекте
-          </Link>
-          <Link href="/professions" className="hover:text-[var(--red)]">
-            Профессии
-          </Link>
-          <Link href="/heroines" className="hover:text-[var(--red)]">
-            Героини
-          </Link>
-        </div> */}
+    <footer className="mt-auto border-t border-[var(--border)] bg-[var(--color-dark)] text-white/80">
+      <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8 text-sm sm:px-6">
+        <p className="font-semibold text-white">«От сказки к профессии»</p>
+        <p>Исследовательский школьный проект</p>
+        <p>Автор: Воеводин Артем, ученик 2 «Б» класса</p>
+        <p>ГУО «Средняя школа №51 г. Минска»</p>
       </div>
     </footer>
-  );
+  )
 }

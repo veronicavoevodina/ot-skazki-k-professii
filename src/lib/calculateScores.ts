@@ -8,13 +8,15 @@ export function createEmptyScores (): QualityScores {
   }, {} as QualityScores)
 }
 
+/** Один ответ = +1 к одному качеству */
 export function calculateQualityScores (answers: Answer[]): QualityScores {
   const scores = createEmptyScores()
 
   for (const answer of answers) {
     for (const [qualityId, value] of Object.entries(answer.scores)) {
+      if (!value) continue
       const id = qualityId as QualityId
-      scores[id] += value ?? 0
+      scores[id] += 1
     }
   }
 
@@ -27,4 +29,36 @@ export function rankQualities (
   return QUALITY_IDS
     .map((id) => ({ id, score: scores[id] }))
     .sort((a, b) => b.score - a.score)
+}
+
+/**
+ * До 3 ведущих качеств.
+ * Если несколько качеств делят балл «на границе» топа — показываем все из этой группы.
+ * Качества с 0 баллами не включаются.
+ */
+export function getLeadingQualities (
+  scores: QualityScores,
+  minCount = 3
+): QualityId[] {
+  const ranked = rankQualities(scores).filter((item) => item.score > 0)
+  if (ranked.length === 0) return []
+
+  const leading: { id: QualityId; score: number }[] = []
+
+  for (const item of ranked) {
+    if (leading.length < minCount) {
+      leading.push(item)
+      continue
+    }
+
+    const lastScore = leading[leading.length - 1].score
+    if (item.score === lastScore) {
+      leading.push(item)
+      continue
+    }
+
+    break
+  }
+
+  return leading.map((item) => item.id)
 }

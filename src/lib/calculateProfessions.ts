@@ -1,6 +1,7 @@
 import { professions } from '@/data/professions'
 import type { ProfessionMatch, QualityId, QualityScores } from '@/lib/types'
 
+/** Старый взвешенный матч — для совместимости каталога, не для рейтинга на результате */
 export function calculateProfessionMatches (
   qualityScores: QualityScores
 ): ProfessionMatch[] {

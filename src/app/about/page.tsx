@@ -1,20 +1,20 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import Link from 'next/link'
 
-export default function AboutPage() {
+export default function AboutPage () {
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
-      <p className="mb-2 text-sm font-medium text-[var(--gold-dark)]">
+      <p className="mb-2 text-sm font-medium text-[var(--color-green)]">
         Исследовательская работа
       </p>
-      <h1 className="text-3xl font-semibold text-[var(--navy)] sm:text-4xl">
+      <h1 className="text-3xl font-semibold text-[var(--color-dark)] sm:text-4xl">
         От сказки к профессии
       </h1>
+      <span className="heading-accent" aria-hidden />
 
-      <div className="mt-8 space-y-8 leading-relaxed text-[var(--navy)]/80">
+      <div className="mt-8 space-y-8 leading-relaxed text-[var(--muted)]">
         <section>
-          <h2 className="mb-3 text-xl font-semibold text-[var(--navy)]">
-            👋 Привет!
+          <h2 className="mb-3 text-xl font-semibold text-[var(--color-dark)]">
+            Привет!
           </h2>
           <p>
             Меня зовут Артём. Я учусь во 2 «Б» классе и сделал это приложение
@@ -25,8 +25,8 @@ export default function AboutPage() {
         </section>
 
         <section className="folk-card p-5">
-          <h2 className="mb-3 text-xl font-semibold text-[var(--navy)]">
-            🔍 Что исследует проект
+          <h2 className="mb-3 text-xl font-semibold text-[var(--color-dark)]">
+            Что исследует проект
           </h2>
           <p className="mb-3">
             В сказках героини часто попадают в трудные ситуации. Их поступки
@@ -37,47 +37,33 @@ export default function AboutPage() {
             Я исследую, как эти качества из сказок связаны с качествами, которые
             помогают людям в современных профессиях.
           </p>
-          <p className="mt-4 font-medium text-[var(--navy)]">
+          <p className="mt-4 font-medium text-[var(--color-dark)]">
             Сказочные героини → их поступки → качества → современные профессии
           </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-semibold text-[var(--navy)]">
-            ✨ Как работает приложение
+          <h2 className="mb-3 text-xl font-semibold text-[var(--color-dark)]">
+            Как работает приложение
           </h2>
           <ol className="list-none space-y-3">
-            <li className="folk-card flex gap-3 px-4 py-3">
-              <span className="font-bold text-[var(--red)]">1.</span>
-              <span>
-                Ты попадаешь в сказочную ситуацию и выбираешь, как поступил бы.
-              </span>
-            </li>
-            <li className="folk-card flex gap-3 px-4 py-3">
-              <span className="font-bold text-[var(--red)]">2.</span>
-              <span>
-                После ответов видно, какие качества проявились в твоих выборах.
-              </span>
-            </li>
-            <li className="folk-card flex gap-3 px-4 py-3">
-              <span className="font-bold text-[var(--red)]">3.</span>
-              <span>
-                Можно узнать, на качества какой сказочной героини они похожи.
-              </span>
-            </li>
-            <li className="folk-card flex gap-3 px-4 py-3">
-              <span className="font-bold text-[var(--red)]">4.</span>
-              <span>
-                Можно познакомиться с профессиями, где такие качества могут
-                пригодиться.
-              </span>
-            </li>
+            {[
+              'Ты попадаешь в сказочную ситуацию и выбираешь, как поступил бы.',
+              'После ответов видно, какие качества проявились в твоих выборах.',
+              'Можно узнать, на качества какой сказочной героини они похожи.',
+              'Можно познакомиться с профессиями, где такие качества могут пригодиться.',
+            ].map((text, index) => (
+              <li key={text} className="folk-card flex gap-3 px-4 py-3">
+                <span className="font-bold text-[var(--color-green)]">{index + 1}.</span>
+                <span>{text}</span>
+              </li>
+            ))}
           </ol>
         </section>
 
         <section className="folk-card p-5">
-          <h2 className="mb-3 text-xl font-semibold text-[var(--navy)]">
-            📖 Какие героини участвуют
+          <h2 className="mb-3 text-xl font-semibold text-[var(--color-dark)]">
+            Какие героини участвуют
           </h2>
           <ul className="space-y-2">
             <li>Настенька — сказка «Морозко»</li>
@@ -87,15 +73,15 @@ export default function AboutPage() {
             <li>Хаврошечка</li>
             <li>Дюймовочка</li>
           </ul>
-          <p className="mt-4 text-sm text-[var(--navy)]/70">
+          <p className="mt-4 text-sm text-[var(--muted)]">
             У каждой героини есть свои сильные качества. О них можно прочитать
             на странице «Героини».
           </p>
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-semibold text-[var(--navy)]">
-            🚀 Как качества связаны с профессиями
+          <h2 className="mb-3 text-xl font-semibold text-[var(--color-dark)]">
+            Как качества связаны с профессиями
           </h2>
           <p className="mb-3">
             Например, ум и любознательность помогают учёному и инженеру. Доброта
@@ -109,23 +95,23 @@ export default function AboutPage() {
           </p>
         </section>
 
-        <section className="rounded-3xl border border-[var(--red)]/20 bg-[var(--linen)] p-5">
-          <p className="font-semibold text-[var(--navy)]">
+        <section className="rounded-[16px] border border-[var(--border)] bg-[rgba(123,149,91,0.08)] p-5">
+          <p className="font-semibold text-[var(--color-dark)]">
             Приложение помогает узнать свои сильные стороны и познакомиться с
             профессиями, в которых такие качества могут пригодиться.
           </p>
-          <p className="mt-3 text-sm text-[var(--navy)]/75">
+          <p className="mt-3 text-sm text-[var(--muted)]">
             Оно не говорит, кем ты станешь, когда вырастешь. Оно не выбирает
             профессию за тебя — только помогает узнать себя лучше и посмотреть,
             что бывает интересным.
           </p>
         </section>
 
-        <section className="folk-card folk-card-frame p-5">
-          <h2 className="mb-3 text-xl font-semibold text-[var(--navy)]">
-            ✏️ Об авторе
+        <section className="folk-card folk-card-frame p-5 pt-6">
+          <h2 className="mb-3 text-xl font-semibold text-[var(--color-dark)]">
+            Об авторе
           </h2>
-          <p className="font-semibold text-[var(--navy)]">Воеводин Артем</p>
+          <p className="font-semibold text-[var(--color-dark)]">Воеводин Артем</p>
           <p>ученик 2 «Б» класса</p>
           <p>ГУО «Средняя школа №51 г. Минска»</p>
         </section>
@@ -134,7 +120,6 @@ export default function AboutPage() {
       <div className="mt-10 flex flex-wrap gap-3">
         <Link href="/test" className="btn-primary">
           Начать тест
-          <ArrowRight className="h-4 w-4" />
         </Link>
         <Link href="/heroines" className="btn-secondary">
           Героини
@@ -144,5 +129,5 @@ export default function AboutPage() {
         </Link>
       </div>
     </div>
-  );
+  )
 }

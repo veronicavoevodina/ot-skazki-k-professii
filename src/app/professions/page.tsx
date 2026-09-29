@@ -1,28 +1,29 @@
-"use client";
+'use client'
 
-import { useMemo, useState } from "react";
-import { ProfessionCard } from "@/components/ProfessionCard";
-import { professions } from "@/data/professions";
-import { qualitiesList } from "@/data/qualities";
-import type { QualityId } from "@/lib/types";
+import { useMemo, useState } from 'react'
+import { ProfessionCard } from '@/components/ProfessionCard'
+import { professions } from '@/data/professions'
+import { qualitiesList } from '@/data/qualities'
+import type { QualityId } from '@/lib/types'
 
-export default function ProfessionsPage() {
-  const [filter, setFilter] = useState<QualityId | "all">("all");
+export default function ProfessionsPage () {
+  const [filter, setFilter] = useState<QualityId | 'all'>('all')
 
   const filtered = useMemo(() => {
-    if (filter === "all") return professions;
-    return professions.filter((p) => (p.qualities[filter] ?? 0) > 0);
-  }, [filter]);
+    if (filter === 'all') return professions
+    return professions.filter((p) => (p.qualities[filter] ?? 0) > 0)
+  }, [filter])
 
   const activeQuality =
-    filter === "all" ? null : qualitiesList.find((q) => q.id === filter);
+    filter === 'all' ? null : qualitiesList.find((q) => q.id === filter)
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
-      <h1 className="text-3xl font-semibold text-[var(--navy)] sm:text-4xl">
+      <h1 className="text-3xl font-semibold text-[var(--color-dark)] sm:text-4xl">
         Каталог профессий
       </h1>
-      <p className="mt-3 max-w-3xl text-[var(--navy)]/70">
+      <span className="heading-accent" aria-hidden />
+      <p className="mt-4 max-w-3xl text-[var(--muted)]">
         Эти направления связаны с качествами из теста. Результат не назначает
         профессию — он помогает выбрать, о чём узнать больше.
       </p>
@@ -30,11 +31,11 @@ export default function ProfessionsPage() {
       <div className="mt-6 flex flex-wrap gap-2">
         <button
           type="button"
-          onClick={() => setFilter("all")}
-          className={`rounded-full px-3 py-1.5 text-sm font-semibold transition ${
-            filter === "all"
-              ? "bg-[var(--red)] text-white"
-              : "bg-[var(--card)] text-[var(--navy)] hover:bg-[var(--linen)]"
+          onClick={() => setFilter('all')}
+          className={`rounded-[10px] px-3 py-1.5 text-sm font-semibold transition ${
+            filter === 'all'
+              ? 'bg-[var(--color-green)] text-white'
+              : 'bg-[var(--card)] text-[var(--color-dark)] hover:bg-[rgba(123,149,91,0.1)]'
           }`}
         >
           Все
@@ -44,19 +45,19 @@ export default function ProfessionsPage() {
             key={quality.id}
             type="button"
             onClick={() => setFilter(quality.id)}
-            className={`rounded-full px-3 py-1.5 text-sm font-semibold transition ${
+            className={`rounded-[10px] px-3 py-1.5 text-sm font-semibold transition ${
               filter === quality.id
-                ? "bg-[var(--red)] text-white"
-                : "bg-[var(--card)] text-[var(--navy)] hover:bg-[var(--linen)]"
+                ? 'bg-[var(--color-green)] text-white'
+                : 'bg-[var(--card)] text-[var(--color-dark)] hover:bg-[rgba(123,149,91,0.1)]'
             }`}
           >
-            {quality.emoji} {quality.name}
+            {quality.name}
           </button>
         ))}
       </div>
 
       {activeQuality && (
-        <p className="mt-4 text-sm font-medium text-[var(--navy)]">
+        <p className="mt-4 text-sm font-medium text-[var(--color-dark)]">
           Профессии, где важна {activeQuality.name.toLowerCase()}
         </p>
       )}
@@ -68,10 +69,10 @@ export default function ProfessionsPage() {
       </div>
 
       {filtered.length === 0 && (
-        <p className="mt-8 text-[var(--navy)]/60">
+        <p className="mt-8 text-[var(--muted)]">
           По этому качеству пока нет профессий.
         </p>
       )}
     </div>
-  );
+  )
 }

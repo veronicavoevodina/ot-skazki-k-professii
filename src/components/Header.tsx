@@ -2,15 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BookOpen, Menu, Sparkles, X } from "lucide-react";
 import { useState } from "react";
 
 const links = [
   { href: "/", label: "Главная" },
   { href: "/test", label: "Тест" },
-  // { href: "/professions", label: "Профессии" },
-  // { href: "/heroines", label: "Героини" },
-  // { href: "/about", label: "О проекте" },
+  { href: "/quiz", label: "Викторина" },
+  { href: "/professions", label: "Профессии" },
 ];
 
 export function Header() {
@@ -18,19 +16,16 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--red)]/15 bg-[var(--milk)]/92 backdrop-blur-md">
-      <div className="h-1.5 w-full" aria-hidden />
+    <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--bg)]/95 backdrop-blur-sm">
+      <div className="h-1 w-full bg-[var(--color-cinnabar)]" aria-hidden />
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <Link
           href="/"
-          className="flex items-center gap-2 font-bold text-[var(--navy)]"
+          className="site-logo leading-tight text-[var(--color-cinnabar)]"
         >
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--red)] text-[var(--milk)]">
-            <Sparkles className="h-4 w-4" />
-          </span>
-          <span className="hidden text-sm leading-tight sm:block">
-            От сказки
-            <br />к профессии
+          <span className="block text-base sm:text-lg">От сказки</span>
+          <span className="block text-sm text-[var(--color-dark)] sm:text-base">
+            к профессии
           </span>
         </Link>
 
@@ -43,10 +38,10 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`rounded-xl px-3 py-2 text-sm font-semibold transition ${
+                className={`rounded-[10px] px-3 py-2 text-sm font-semibold transition ${
                   active
-                    ? "bg-[var(--red)] text-white"
-                    : "text-[var(--navy)]/80 hover:bg-[var(--linen)]"
+                    ? "bg-[var(--color-green)] text-white"
+                    : "text-[var(--color-dark)]/80 hover:bg-[rgba(196,163,90,0.15)]"
                 }`}
               >
                 {link.label}
@@ -64,24 +59,23 @@ export function Header() {
           </Link>
           <button
             type="button"
-            className="rounded-lg p-2 text-[var(--navy)] md:hidden"
+            className="rounded-[10px] px-3 py-2 text-sm font-semibold text-[var(--color-dark)] md:hidden"
             onClick={() => setOpen((v) => !v)}
-            aria-label={open ? "Закрыть меню" : "Открыть меню"}
           >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {open ? "Закрыть" : "Меню"}
           </button>
         </div>
       </div>
 
       {open && (
-        <div className="border-t border-[var(--red)]/10 bg-[var(--linen)]/80 px-4 py-3 md:hidden">
+        <div className="border-t border-[var(--border)] bg-[var(--bg-soft)] px-4 py-3 md:hidden">
           <div className="flex flex-col gap-1">
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="rounded-xl px-3 py-2.5 font-semibold text-[var(--navy)] hover:bg-white/70"
+                className="rounded-[10px] px-3 py-2.5 font-semibold text-[var(--color-dark)] hover:bg-[rgba(123,149,91,0.1)]"
               >
                 {link.label}
               </Link>
@@ -91,7 +85,6 @@ export function Header() {
               onClick={() => setOpen(false)}
               className="btn-primary mt-2"
             >
-              <BookOpen className="h-4 w-4" />
               Пройти тест
             </Link>
           </div>

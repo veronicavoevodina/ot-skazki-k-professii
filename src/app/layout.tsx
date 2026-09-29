@@ -1,32 +1,40 @@
-import type { Metadata } from "next";
-import { Literata, Nunito } from "next/font/google";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
-import "./globals.css";
+import type { Metadata } from 'next'
+import localFont from 'next/font/local'
+import { Forum, Lora } from 'next/font/google'
+import { Footer } from '@/components/Footer'
+import { Header } from '@/components/Header'
+import './globals.css'
 
-const display = Literata({
-  variable: "--font-display",
-  subsets: ["latin", "cyrillic"],
-  weight: ["500", "600", "700"],
-});
+const logo = localFont({
+  src: '../fonts/RuslanDisplay-Regular.ttf',
+  variable: '--font-logo',
+  display: 'swap',
+  weight: '400',
+})
 
-const body = Nunito({
-  variable: "--font-body",
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "600", "700", "800"],
-});
+const display = Forum({
+  variable: '--font-display',
+  subsets: ['latin', 'latin-ext'],
+  weight: '400',
+})
+
+const body = Lora({
+  variable: '--font-body',
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600', '700'],
+})
 
 export const metadata: Metadata = {
-  title: "От сказки к профессии",
+  title: 'От сказки к профессии',
   description:
-    "Сказочное путешествие для второклассников: качества героев сказок и профессии, где они могут пригодиться.",
-};
+    'Сказочное путешествие для второклассников: качества героев сказок и профессии, где они могут пригодиться.',
+}
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout ({ children }: LayoutProps<'/'>) {
   return (
     <html
       lang="ru"
-      className={`${display.variable} ${body.variable} h-full antialiased`}
+      className={`${logo.variable} ${display.variable} ${body.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <Header />
@@ -34,5 +42,5 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Footer />
       </body>
     </html>
-  );
+  )
 }

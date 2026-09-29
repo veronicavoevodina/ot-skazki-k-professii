@@ -1,14 +1,16 @@
-"use client";
+'use client'
 
 interface AnswerOptionProps {
-  letter: string;
-  text: string;
-  selected: boolean;
-  onSelect: () => void;
+  letter: string
+  letterName: string
+  text: string
+  selected: boolean
+  onSelect: () => void
 }
 
-export function AnswerOption({
+export function AnswerOption ({
   letter,
+  letterName,
   text,
   selected,
   onSelect,
@@ -17,24 +19,17 @@ export function AnswerOption({
     <button
       type="button"
       onClick={onSelect}
-      className={`flex w-full items-start gap-3 rounded-2xl border-2 px-4 py-3.5 text-left transition ${
+      className={`flex w-full items-start gap-3 rounded-[12px] border px-4 py-3.5 text-left transition ${
         selected
-          ? "border-[var(--red)] bg-[var(--red)] text-white"
-          : "border-[var(--navy)]/12 bg-[var(--card)] text-[var(--navy)] hover:border-[var(--red)]/45 hover:bg-[#fff8f0]"
+          ? 'border-[var(--color-cinnabar)] bg-[rgba(181,53,67,0.08)] text-[var(--color-dark)]'
+          : 'border-[rgba(196,163,90,0.45)] bg-[rgba(250,246,239,0.65)] text-[var(--color-dark)] hover:border-[var(--color-ochre-deep)] hover:bg-[rgba(196,163,90,0.1)]'
       }`}
     >
-      <span
-        className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-extrabold ${
-          selected
-            ? "bg-[var(--gold)] text-[var(--ink)]"
-            : "bg-[var(--linen)] text-[var(--navy)]"
-        }`}
-      >
-        {letter}
+      <span className={`letter-mark ${selected ? 'is-selected' : ''}`} aria-hidden>
+        <span className="letter-mark-main">{letter}</span>
+        <span className="letter-mark-sub">{letterName}</span>
       </span>
-      <span className="text-sm font-semibold leading-relaxed sm:text-base">
-        {text}
-      </span>
+      <span className="pt-1 text-sm font-medium leading-relaxed sm:text-base">{text}</span>
     </button>
-  );
+  )
 }

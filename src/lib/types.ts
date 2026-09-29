@@ -5,8 +5,9 @@ export type QualityId =
   | 'persistence'
   | 'kindness'
   | 'hard_work'
-  | 'curiosity'
+  | 'patience'
   | 'care'
+  | 'curiosity'
 
 export interface Quality {
   id: QualityId
@@ -20,6 +21,7 @@ export interface Quality {
 export interface Answer {
   id: string
   text: string
+  /** Один ответ → одно качество со значением 1 */
   scores: Partial<Record<QualityId, number>>
 }
 
@@ -68,6 +70,19 @@ export interface ProfessionMatch {
   score: number
 }
 
+export interface RelatedProfession {
+  title: string
+  slug?: string
+}
+
+export interface ProfessionRiddle {
+  id: number
+  riddle: string
+  profession: string
+  description: string
+  qualities: QualityId[]
+}
+
 export interface HeroineMatch {
   heroine: Heroine
   score: number
@@ -77,6 +92,8 @@ export interface HeroineMatch {
 export interface TestResult {
   qualityScores: QualityScores
   rankedQualities: { id: QualityId; score: number }[]
+  leadingQualities: QualityId[]
+  relatedProfessions: RelatedProfession[]
   professionMatches: ProfessionMatch[]
   heroineMatch: HeroineMatch
   completedAt: string

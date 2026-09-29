@@ -2,13 +2,13 @@
 
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import { ArrowLeft, Sparkles } from 'lucide-react'
 import { QuestionCard } from '@/components/QuestionCard'
 import { ProgressBar } from '@/components/ProgressBar'
 import { questions } from '@/data/questions'
 import { calculateHeroineMatch } from '@/lib/calculateHeroineMatch'
 import { calculateProfessionMatches } from '@/lib/calculateProfessions'
-import { calculateQualityScores, rankQualities } from '@/lib/calculateScores'
+import { calculateQualityScores, getLeadingQualities, rankQualities } from '@/lib/calculateScores'
+import { collectRelatedProfessions } from '@/data/qualityInfo'
 import { saveTestResult } from '@/lib/storage'
 import type { Answer } from '@/lib/types'
 
@@ -38,12 +38,16 @@ export default function TestPage () {
 
     const qualityScores = calculateQualityScores(chosen)
     const rankedQualities = rankQualities(qualityScores)
+    const leadingQualities = getLeadingQualities(qualityScores)
+    const relatedProfessions = collectRelatedProfessions(leadingQualities)
     const professionMatches = calculateProfessionMatches(qualityScores)
     const heroineMatch = calculateHeroineMatch(qualityScores)
 
     saveTestResult({
       qualityScores,
       rankedQualities,
+      leadingQualities,
+      relatedProfessions,
       professionMatches,
       heroineMatch,
       completedAt: new Date().toISOString(),
@@ -81,24 +85,17 @@ export default function TestPage () {
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12">
       <div className="mb-6 text-center">
-        <div className="section-label mb-2">
-          <Sparkles className="h-4 w-4 text-[var(--gold-dark)]" />
-          Волшебное путешествие
-        </div>
+        <div className="section-label mb-2">Волшебное путешествие</div>
       </div>
 
       <div className="mb-6">
-        <div className="mb-2 flex items-center justify-between text-sm font-semibold text-[var(--navy)]/70">
+        <div className="mb-2 flex items-center justify-between text-sm font-semibold text-[var(--muted)]">
           <span>
             Испытание {currentIndex + 1} из {total}
           </span>
           <span>{Math.round(((currentIndex + 1) / total) * 100)}%</span>
         </div>
-        <ProgressBar
-          value={currentIndex + 1}
-          max={total}
-          color="var(--red)"
-        />
+        <ProgressBar value={currentIndex + 1} max={total} />
       </div>
 
       <QuestionCard
@@ -116,11 +113,10 @@ export default function TestPage () {
           disabled={!canGoBack || isFinishing}
           className="btn-secondary !px-4 !py-2.5 text-sm disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:transform-none"
         >
-          <ArrowLeft className="h-4 w-4" />
           Назад
         </button>
 
-        <p className="text-right text-sm text-[var(--navy)]/55">
+        <p className="text-right text-sm text-[var(--muted)]">
           {isFinishing
             ? 'Считаем результат…'
             : isLast
