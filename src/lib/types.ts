@@ -1,100 +1,101 @@
 export type QualityId =
-  | 'intelligence'
-  | 'resourcefulness'
-  | 'courage'
-  | 'persistence'
-  | 'kindness'
-  | 'hard_work'
-  | 'patience'
-  | 'care'
-  | 'curiosity'
+  | "intelligence"
+  | "resourcefulness"
+  | "courage"
+  | "persistence"
+  | "kindness"
+  | "hard_work"
+  | "patience"
+  | "care"
+  | "curiosity";
 
 export interface Quality {
-  id: QualityId
-  name: string
-  description: string
-  kidPhrase: string
-  emoji: string
-  color: string
+  id: QualityId;
+  name: string;
+  description: string;
+  kidPhrase: string;
+  emoji: string;
+  color: string;
 }
 
 export interface Answer {
-  id: string
-  text: string
+  id: string;
+  text: string;
   /** Один ответ → одно качество со значением 1 */
-  scores: Partial<Record<QualityId, number>>
+  scores: Partial<Record<QualityId, number>>;
 }
 
 export interface Question {
-  id: string
-  text: string
-  themeEmoji: string
-  themeLabel: string
-  themeColor: string
-  answers: Answer[]
+  id: string;
+  text: string;
+  themeEmoji: string;
+  themeLabel: string;
+  themeColor: string;
+  heroineIds?: string[];
+  answers: Answer[];
 }
 
 export interface Profession {
-  id: string
-  slug: string
-  title: string
-  shortDescription: string
-  description: string
-  whatDoes: string
-  schoolSubjects: string[]
-  qualities: Partial<Record<QualityId, number>>
-  heroineIds: string[]
+  id: string;
+  slug: string;
+  title: string;
+  shortDescription: string;
+  description: string;
+  whatDoes: string;
+  schoolSubjects: string[];
+  qualities: Partial<Record<QualityId, number>>;
+  heroineIds: string[];
   education?: {
-    institution: string
-    url: string
-  }[]
-  icon: string
+    institution: string;
+    url: string;
+  }[];
+  icon: string;
 }
 
 export interface Heroine {
-  id: string
-  slug: string
-  name: string
-  story: string
-  trial: string
-  deed: string
-  shortDescription: string
-  qualities: Partial<Record<QualityId, number>>
-  professionConnections: string[]
+  id: string;
+  slug: string;
+  name: string;
+  story: string;
+  trial: string;
+  deed: string;
+  shortDescription: string;
+  qualities: Partial<Record<QualityId, number>>;
+  professionConnections: string[];
 }
 
-export type QualityScores = Record<QualityId, number>
+export type QualityScores = Record<QualityId, number>;
 
 export interface ProfessionMatch {
-  profession: Profession
-  score: number
+  profession: Profession;
+  score: number;
 }
 
 export interface RelatedProfession {
-  title: string
-  slug?: string
+  title: string;
+  slug?: string;
 }
 
 export interface ProfessionRiddle {
-  id: number
-  riddle: string
-  profession: string
-  description: string
-  qualities: QualityId[]
+  id: number;
+  riddle: string;
+  profession: string;
+  description: string;
+  qualities: QualityId[];
 }
 
 export interface HeroineMatch {
-  heroine: Heroine
-  score: number
-  sharedQualities: QualityId[]
+  heroine: Heroine;
+  score: number;
+  sharedQualities: QualityId[];
 }
 
 export interface TestResult {
-  qualityScores: QualityScores
-  rankedQualities: { id: QualityId; score: number }[]
-  leadingQualities: QualityId[]
-  relatedProfessions: RelatedProfession[]
-  professionMatches: ProfessionMatch[]
-  heroineMatch: HeroineMatch
-  completedAt: string
+  qualityScores: QualityScores;
+  rankedQualities: { id: QualityId; score: number }[];
+  leadingQualities: QualityId[];
+  relatedProfessions: RelatedProfession[];
+  professionMatches: ProfessionMatch[];
+  heroineMatch: HeroineMatch;
+  completedAt: string;
 }

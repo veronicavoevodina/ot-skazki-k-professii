@@ -1,5 +1,7 @@
 'use client'
 
+import Image from 'next/image'
+import { getProfessionImageByTitle } from '@/data/professionImages'
 import { qualities } from '@/data/qualities'
 import type { ProfessionRiddle } from '@/lib/types'
 
@@ -16,6 +18,7 @@ function formatNumber (id: number): string {
 export function RiddleCard ({ riddle, isFlipped, onToggle }: RiddleCardProps) {
   const number = formatNumber(riddle.id)
   const qualityNames = riddle.qualities.map((id) => qualities[id].name)
+  const professionImage = getProfessionImageByTitle(riddle.profession)
 
   return (
     <button
@@ -38,15 +41,32 @@ export function RiddleCard ({ riddle, isFlipped, onToggle }: RiddleCardProps) {
 
         <span className="riddle-card-face riddle-card-back">
           <span className="riddle-card-number">{number}</span>
-          <span className="riddle-card-profession">{riddle.profession}</span>
-          <span className="riddle-card-description">{riddle.description}</span>
-          <span className="riddle-card-qualities-label">Какие качества пригодятся?</span>
-          <span className="riddle-card-qualities">
-            {qualityNames.map((name) => (
-              <span key={name} className="riddle-card-badge">
-                {name}
+          <span
+            className={`riddle-card-back-row${professionImage ? ' has-photo' : ''}`}
+          >
+            <span className="riddle-card-back-text">
+              <span className="riddle-card-profession">{riddle.profession}</span>
+              <span className="riddle-card-description">{riddle.description}</span>
+              <span className="riddle-card-qualities-label">Какие качества пригодятся?</span>
+              <span className="riddle-card-qualities">
+                {qualityNames.map((name) => (
+                  <span key={name} className="riddle-card-badge">
+                    {name}
+                  </span>
+                ))}
               </span>
-            ))}
+            </span>
+            {professionImage && (
+              <span className="riddle-card-photo" aria-hidden>
+                <Image
+                  src={professionImage}
+                  alt=""
+                  width={144}
+                  height={144}
+                  className="riddle-card-photo-img"
+                />
+              </span>
+            )}
           </span>
         </span>
       </span>

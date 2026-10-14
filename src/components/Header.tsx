@@ -9,6 +9,7 @@ const links = [
   { href: "/test", label: "Тест" },
   { href: "/quiz", label: "Викторина" },
   { href: "/professions", label: "Профессии" },
+  { href: "/facts", label: "Интересные факты" },
 ];
 
 export function Header() {

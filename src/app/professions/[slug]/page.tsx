@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { ProfessionThumbnail } from '@/components/ProfessionThumbnail'
 import { getHeroineById } from '@/data/heroines'
 import { getProfessionBySlug, professions } from '@/data/professions'
 import { qualities } from '@/data/qualities'
@@ -36,14 +37,25 @@ export default async function ProfessionPage ({ params }: PageProps) {
         ← Все профессии
       </Link>
 
-      <h1 className="mt-4 text-3xl font-semibold text-[var(--color-dark)] sm:text-4xl">
-        {profession.title}
-      </h1>
-      <span className="heading-accent" aria-hidden />
+      <div className="mt-6 grid gap-6 md:grid-cols-[minmax(0,1fr)_220px] md:items-start">
+        <div>
+          <h1 className="text-3xl font-semibold text-[var(--color-dark)] sm:text-4xl">
+            {profession.title}
+          </h1>
+          <span className="heading-accent" aria-hidden />
 
-      <p className="mt-4 text-lg leading-relaxed text-[var(--muted)]">
-        {profession.shortDescription}
-      </p>
+          <p className="mt-4 text-lg leading-relaxed text-[var(--muted)]">
+            {profession.shortDescription}
+          </p>
+        </div>
+
+        <ProfessionThumbnail
+          title={profession.title}
+          slug={profession.slug}
+          variant="hero"
+          className="md:sticky md:top-24"
+        />
+      </div>
 
       <section className="mt-10">
         <h2 className="mb-3 text-2xl font-semibold text-[var(--color-dark)]">

@@ -6,6 +6,7 @@ export const questions: Question[] = [
     themeEmoji: "🧙‍♀️",
     themeLabel: "Василиса Премудрая — волшебное задание",
     themeColor: "#7c3aed",
+    heroineIds: ["vasilisa"],
     text: "Представь, что ты оказался на месте Василисы Премудрой. Тебе дали очень трудное задание, а времени осталось совсем немного. Что ты сделаешь?",
     answers: [
       {
@@ -35,6 +36,7 @@ export const questions: Question[] = [
     themeEmoji: "❄️",
     themeLabel: "Герда — снежный путь",
     themeColor: "#0e7490",
+    heroineIds: ["gerda"],
     text: "Представь, что ты отправился вместе с Гердой искать Кая. По дороге встретилось много препятствий. Что ты сделаешь?",
     answers: [
       {
@@ -64,6 +66,7 @@ export const questions: Question[] = [
     themeEmoji: "🌲",
     themeLabel: "Морозко — зимний лес",
     themeColor: "#1e3a5f",
+    heroineIds: ["nastenka"],
     text: "Представь, что ты оказался в зимнем лесу и встретил Морозко. Он спрашивает тебя, умеешь ли ты помогать другим. Как ты поступишь?",
     answers: [
       {
@@ -93,6 +96,7 @@ export const questions: Question[] = [
     themeEmoji: "🐄",
     themeLabel: "Хаврошечка — работа",
     themeColor: "#b45309",
+    heroineIds: ["havroshechka"],
     text: "Представь, что тебе нужно помочь Хаврошечке выполнить много работы до вечера. Что тебе больше всего подходит?",
     answers: [
       {
@@ -122,6 +126,7 @@ export const questions: Question[] = [
     themeEmoji: "🌷",
     themeLabel: "Дюймовочка — незнакомый мир",
     themeColor: "#be185d",
+    heroineIds: ["thumbelina"],
     text: "Представь, что ты оказался в мире, где всё вокруг совсем незнакомое. Что тебе захотелось бы сделать?",
     answers: [
       {
@@ -151,6 +156,7 @@ export const questions: Question[] = [
     themeEmoji: "🐸",
     themeLabel: "Царевна-лягушка — царское задание",
     themeColor: "#166534",
+    heroineIds: ["frog-princess"],
     text: "Царю нужно выполнить необычное задание. Представь, что такое задание дали тебе. Как ты будешь его выполнять?",
     answers: [
       {
@@ -180,6 +186,7 @@ export const questions: Question[] = [
     themeEmoji: "🤝",
     themeLabel: "Помощь другу",
     themeColor: "#ca8a04",
+    heroineIds: ["gerda", "nastenka"],
     text: "Представь, что твой друг пытается решить сложную задачу, но у него не получается. Что ты сделаешь?",
     answers: [
       {
@@ -209,6 +216,7 @@ export const questions: Question[] = [
     themeEmoji: "🛠️",
     themeLabel: "Волшебная мастерская",
     themeColor: "#57534e",
+    heroineIds: ["frog-princess", "vasilisa"],
     text: "Ты попал в волшебную мастерскую. Перед тобой лежат разные задания. Что тебе было бы интереснее всего?",
     answers: [
       {
@@ -238,6 +246,7 @@ export const questions: Question[] = [
     themeEmoji: "📖",
     themeLabel: "Волшебная библиотека",
     themeColor: "#9f1239",
+    heroineIds: ["vasilisa", "thumbelina"],
     text: "В библиотеке ты нашёл волшебную книгу. Она может ответить только на один твой вопрос. Что тебе интереснее узнать?",
     answers: [
       {
@@ -267,6 +276,7 @@ export const questions: Question[] = [
     themeEmoji: "🧚",
     themeLabel: "Сказочный помощник",
     themeColor: "#c9a227",
+    heroineIds: ["nastenka", "gerda", "havroshechka"],
     text: "Представь, что ты стал помощником сказочного героя. Какое задание ты бы выбрал?",
     answers: [
       {

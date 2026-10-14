@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useMemo, useSyncExternalStore } from 'react'
+import { ProfessionThumbnail } from '@/components/ProfessionThumbnail'
 import { ResultSection } from '@/components/ResultSection'
 import { qualityInfo, collectRelatedProfessions } from '@/data/qualityInfo'
 import { getLeadingQualities } from '@/lib/calculateScores'
@@ -114,6 +115,11 @@ export default function ResultPage () {
           {view.relatedProfessions.map((item) => {
             const card = (
               <div className="folk-card p-4">
+                <ProfessionThumbnail
+                  title={item.title}
+                  slug={item.slug}
+                  className="!mb-3"
+                />
                 <p className="font-semibold text-[var(--color-dark)]">{item.title}</p>
               </div>
             )
